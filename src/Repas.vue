@@ -42,29 +42,31 @@
 
     <!-- Tableau des repas -->
     <div style="margin-top: 50px;">
-      <table class="table table-bordered table-striped text-center text-uppercase">
-        <thead>
-          <tr>
-            <th class="bg-secondary text-light">Date</th>
-            <th class="bg-warning">Midi <i class="bi bi-sun"></i></th>
-            <th style="background-color: purple" class="text-light">Soir <i class="bi bi-moon"></i></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="day in daysList" :key="day.name">
-            <th style="background-color: #e9cbb1">{{ day.label }}</th>
-            <td>
-              {{ days[day.midi] }}
-              <button v-if="days[day.midi]" @click="deleteMeal(day.midi)">x</button>
-            </td>
-            <td>
-              {{ days[day.soir] }}
-              <button v-if="days[day.soir]" @click="deleteMeal(day.soir)">x</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+        <table class="table table-bordered table-striped text-center text-uppercase">
+          <thead>
+            <tr>
+              <th class="bg-secondary text-light">Date</th>
+              <th class="bg-warning">Midi <i class="bi bi-sun"></i></th>
+              <th style="background-color: purple" class="text-light">Soir <i class="bi bi-moon"></i></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="day in daysList" :key="day.name">
+              <th style="background-color: #e9cbb1">{{ day.label }}</th>
+              <td>
+                {{ days[day.midi] }}
+                <button v-if="days[day.midi]" @click="deleteMeal(day.midi)">x</button>
+              </td>
+              <td>
+                {{ days[day.soir] }}
+                <button v-if="days[day.soir]" @click="deleteMeal(day.soir)">x</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    <img src="./styles/images/dinner.jpg" alt="assiettes et couverts sur une table" class="w-100 object-fit-cover" />
   </div>
 </template>
 
@@ -119,3 +121,11 @@ const deleteMeal = (mealKey) => {
 // Activer/désactiver le bouton
 const isButtonDisabled = computed(() => !newMeal.value.name.trim() || !newMeal.value.day);
 </script>
+
+
+<!-- style **************************** -->
+ <style>
+
+
+
+</style>

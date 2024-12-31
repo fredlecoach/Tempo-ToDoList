@@ -17,6 +17,7 @@
         </button>
       </button>
 
+      <Transition>
       <!-- Navigation (affichée ou masquée selon l'état) -->
       <nav v-if="afficherNav" class="navbar">
         <ul class="navbar-nav">
@@ -37,6 +38,8 @@
           </li>
         </ul>
       </nav>
+    </Transition>
+
     </div>
 
     <!-- Contenu principal -->
@@ -164,5 +167,15 @@ const toggleMenu = () => {
 .bouton:hover {
   background-color: #73d298;
   color: #083731;
+}
+
+/* effet de transition du menu */
+.v-enter-from, .v-leave-to{
+  opacity: 0;
+  transform: translateX(10px);
+}
+
+.v-enter-active, .v-leave-active{
+  transition: .7s ;
 }
 </style>
