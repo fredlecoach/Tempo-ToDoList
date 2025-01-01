@@ -18,8 +18,8 @@
               <button class="btn boutonBis btn-sm ms-2" @click="loadCourses(recipe)">Sélectionner</button>
             </div>
           </li>
-          <span v-show="!recipes.length" class="text-primary">
-            {{ ingredientsList ? 'Aucune recette enregistrée' : 'Aucun ingrédient ajouté' }}
+          <span v-show="!recipes.length" class="text-primary px-2 fw-bold">
+            {{ ingredientsList ? 'Aucun ingrédient ajouté' : 'Aucune recette enregistrée' }}
           </span>
         </ul>
 
@@ -41,25 +41,36 @@
       </form>
 
       <!-- Liste des courses -->
-      <ul>
-        <li v-for="(item, id) in filteredCourses" :key="id" class="mb-2">
-          <strong :style="{ textDecoration: item.done ? 'line-through' : '', color: item.done ? 'red' : '' }">
-            {{ item.name.toUpperCase() }}
-          </strong>
-          x {{ item.quantity }}
-          <input 
-            v-model="item.done" 
-            type="checkbox" 
-            :id="'case' + id"
-            @change="sortCourses"
-            :aria-checked="item.done"
-          />
-          <button class="btn bg-success text-light fs-5 mx-1" @click="increment(id)"> + </button>
-          <button class=" btn bg-warning text-light fs-5" @click="decrement(id)"> - </button>
-          <button @click="deleteItem(id)" class="btn btn-danger mx-1">Supprimer</button>
+      <ul class="d-flex flex-column">
+        <li v-for="(item, id) in filteredCourses" :key="id" class=" mb-2">
+          <!-- Colonne des éléments (nom, quantité, case à cocher) -->
+          <div class="flex-grow-1">
+            <strong :style="{ textDecoration: item.done ? 'line-through' : '', color: item.done ? 'red' : '' }">
+              {{ item.name.toUpperCase() }}
+            </strong>
+            x {{ item.quantity }}
+            <input 
+              v-model="item.done" 
+              type="checkbox" 
+              :id="'case' + id"
+              @change="sortCourses"
+              :aria-checked="item.done"
+            />
+          </div>
+          
+          <!-- Colonne des boutons (+, -, Supprimer) -->
+          
+            <button class="btn bg-success text-light fw-bold mb-1" title="augmenter la quantité" @click="increment(id)"> + </button>
+            <button class="btn bg-warning text-light mb-1 fw-bold mx-1" title="diminuer la quantité" @click="decrement(id)"> - </button>
+            <button class="btn btn-danger mb-1" title="supprimer" @click="deleteItem(id)">X</button>
+          
         </li>
-        <span v-show="courses.length === 0" class="text-danger"><em>{{ messageListeVide }}</em></span>
+
+        <span v-show="courses.length === 0" class="text-danger">
+          <em>{{ messageListeVide }}</em>
+        </span>
       </ul>
+
       <p class="border col-3 px-1" v-if="restCourses > 0"><i>Nombre d'article{{ restCourses > 1 ? 's' : '' }} à prendre :</i> <span class="text-primary fw-bold">{{ restCourses }}</span> </p>
       <!-- <check name="frédéric" surname="fred" age= 45 /> -->
       <img src="./styles/images/caddie-ecurueil.jpg" alt="caddie de courses" class="w-100 object-fit-cover" />
