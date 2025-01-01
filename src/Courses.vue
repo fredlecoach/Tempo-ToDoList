@@ -13,10 +13,16 @@
 
         <ul class="dropdown-menu">
           <li v-for="(recipe, id) in recipes" :key="id">
-            <a class="dropdown-item">{{ recipe.name.toUpperCase() }} <button class="btn boutonBis btn-sm" @click="loadCourses(recipe)">Sélectionner</button>
-            </a>
+            <div class="d-flex align-items-center">
+              <span class="dropdown-item">{{ recipe.name.toUpperCase() }}</span>
+              <button class="btn boutonBis btn-sm ms-2" @click="loadCourses(recipe)">Sélectionner</button>
+            </div>
           </li>
+          <span v-show="!recipes.length" class="text-primary">
+            {{ ingredientsList ? 'Aucune recette enregistrée' : 'Aucun ingrédient ajouté' }}
+          </span>
         </ul>
+
       </div>
 
       
@@ -174,15 +180,10 @@ const loadCourses = (recipe) => {
       ? recipe.ingredients.split(',').map((ing) => ing.trim()) // Si c'est une chaîne, la diviser
       : recipe.ingredients; // Sinon, utiliser directement le tableau
 
-      if(!ingredientsList || ingredientsList === 0){
-        return `Aucun ingrédient ou recette ajoutée !`
-      }else{
-        // Ajouter les ingrédients à la liste des courses
+    // Ajouter les ingrédients à la liste des courses
     ingredientsList.forEach((ingredient) => {
       courses.value.push({ name: ingredient, quantity: 1, done: false });
     });
-      }
-    
 
     // Mettre à jour le localStorage
     localStorage.setItem('items', JSON.stringify(courses.value));
