@@ -174,10 +174,15 @@ const loadCourses = (recipe) => {
       ? recipe.ingredients.split(',').map((ing) => ing.trim()) // Si c'est une chaîne, la diviser
       : recipe.ingredients; // Sinon, utiliser directement le tableau
 
-    // Ajouter les ingrédients à la liste des courses
+      if(!ingredientsList){
+        return `Aucune recette ajoutée !`
+      }else{
+        // Ajouter les ingrédients à la liste des courses
     ingredientsList.forEach((ingredient) => {
       courses.value.push({ name: ingredient, quantity: 1, done: false });
     });
+      }
+    
 
     // Mettre à jour le localStorage
     localStorage.setItem('items', JSON.stringify(courses.value));
