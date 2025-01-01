@@ -174,8 +174,8 @@ const loadCourses = (recipe) => {
       ? recipe.ingredients.split(',').map((ing) => ing.trim()) // Si c'est une chaîne, la diviser
       : recipe.ingredients; // Sinon, utiliser directement le tableau
 
-      if(!ingredientsList){
-        return `Aucune recette ajoutée !`
+      if(!ingredientsList || ingredientsList === 0){
+        return `Aucun ingrédient ou recette ajoutée !`
       }else{
         // Ajouter les ingrédients à la liste des courses
     ingredientsList.forEach((ingredient) => {
