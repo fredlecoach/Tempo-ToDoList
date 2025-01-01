@@ -1,9 +1,24 @@
 <template>
   <h1>Liste de course <i class="bi bi-cart-fill"></i> </h1>
-      <button class="btn bouton mx-1 mb-1" @click="toggleHiddenItems" title="cliquer pour masquer ou afficher les éléments ajoutés">
+      <button class="btn btn-secondary mx-1 mb-1" @click="toggleHiddenItems" title="cliquer pour masquer ou afficher les éléments ajoutés">
         {{ hiddenItems ? '🫣 Masquer' : '👁️ Afficher ' }} les produits déjà pris
-      </button>
-      <button class="btn bouton mb-1 mx-1" @click="toggleTri">{{ triCroissant ? '↡ Alphabétique (Z-A)' : '↟ Alphabétique (A-Z)' }}</button>
+      </button><br>
+      <button class="btn btn-secondary mb-1 mx-1" @click="toggleTri">{{ triCroissant ? '↡ Alphabétique (Z-A)' : '↟ Alphabétique (A-Z)' }}</button>
+      <!-- bouton choix multiples -->
+      <!-- Liste des recettes pour récupérer les ingrédients -->
+      <div class="dropdown mx-1">
+        <a class="btn boutonBis dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Récupérer ingrédients
+        </a>
+
+        <ul class="dropdown-menu">
+          <li v-for="(recipe, id) in recipes" :key="id">
+            <a class="dropdown-item">{{ recipe.name.toUpperCase() }} <button class="btn boutonBis btn-sm" @click="loadCourses(recipe)">Sélectionner</button>
+            </a>
+          </li>
+        </ul>
+      </div>
+
       
 
       <!-- formulaire pour ajouter des produits -->
@@ -48,8 +63,9 @@
 
 <!-- logique script ***************************************************** -->
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 // import check from './Name.vue';
+import Recettes from './Recettes.vue';
 
 
 // Liste des courses, initialement vide
@@ -61,18 +77,32 @@ const messageListeVide = "Aucun produit ajouté";
 // Gestion de l'ajout d'un produit
 const newItem = ref('');
 
+ // charger la liste de produits enregistrées depuis le localStorage
+ onMounted( ()=>{
+      const storeItems = localStorage.getItem('items');
+      if  (storeItems){
+        courses.value = JSON.parse(storeItems)
+      }
+    })
+
 // ajouter un produit
 const addItem = () => {
   if (newItem.value.trim() !== '') {
     courses.value.push({ name: newItem.value.trim(), quantity: 1, done: false });
+
     newItem.value = '';
     sortCourses(); // Tri après ajout
+
+    // sauvegarder dans le localStorage
+    localStorage.setItem('items', JSON.stringify(courses.value));
   }
 };
+
 
 // Fonction pour trier les courses en fonction de leur état 'done'
 const sortCourses = () => {
   courses.value.sort((a, b) => Number(a.done) - Number(b.done));
+  localStorage.setItem('items', JSON.stringify(courses.value))
 };
 
 // État pour gérer les éléments masqués
@@ -91,6 +121,7 @@ const toggleHiddenItems = () => {
 // augmenter quantité d'un produit
 const increment = (id) => {
   courses.value[id].quantity++;
+  localStorage.setItem('items', JSON.stringify(courses.value))
 };
 
 // diminuer la quantité d'un produit
@@ -98,12 +129,14 @@ const decrement = (id) => {
   courses.value[id].quantity--;
   if (courses.value[id].quantity === 0) {
     courses.value.splice(id, 1);
+    localStorage.setItem('items', JSON.stringify(courses.value))
   }
 };
 
 // Supprimer un produit
 const deleteItem = (id) => {
   courses.value.splice(id, 1);
+  localStorage.setItem('items', JSON.stringify(courses.value))
 };
 
 // État pour gérer le tri
@@ -133,6 +166,37 @@ const restCourses = computed(
   }
 )
 
+// Récupérer les ingrédients d'une recette spécifique et les ajouter à la liste de courses
+const loadCourses = (recipe) => {
+  if (recipe.ingredients) {
+    // Convertir les ingrédients en tableau si nécessaire
+    const ingredientsList = typeof recipe.ingredients === 'string'
+      ? recipe.ingredients.split(',').map((ing) => ing.trim()) // Si c'est une chaîne, la diviser
+      : recipe.ingredients; // Sinon, utiliser directement le tableau
+
+    // Ajouter les ingrédients à la liste des courses
+    ingredientsList.forEach((ingredient) => {
+      courses.value.push({ name: ingredient, quantity: 1, done: false });
+    });
+
+    // Mettre à jour le localStorage
+    localStorage.setItem('items', JSON.stringify(courses.value));
+  } else {
+    console.warn("La recette sélectionnée ne contient pas d'ingrédients.");
+  }
+};
+
+// Charger les recettes depuis le localStorage
+const recipes = ref([]);
+
+onMounted(() => {
+  const storedRecipes = localStorage.getItem('recipes');
+  if (storedRecipes) {
+    recipes.value = JSON.parse(storedRecipes);
+  }
+});
+
+
 </script>
 
 <style>
@@ -145,4 +209,16 @@ const restCourses = computed(
   background-color: #73d298;
   color: #083731;
 }
+
+.boutonBis{
+  background-color: #2b4070;
+  color: #e9cbb1;
+}
+
+.boutonBis:hover{
+  background-color: #e9cbb1;
+  color: #2b4070;
+
+}
+
 </style>

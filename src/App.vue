@@ -13,8 +13,8 @@
         @click="toggleNav"
         aria-label="Toggle navigation"
       >
-        <button class="navbar-toggler-icon btn text-dark fw-bold" @click="toggleMenu">{{ menu }}
-        </button>
+        <p class="navbar-toggler-icon btn text-dark fw-bold" @click="toggleMenu">{{ menu }}
+        </p>
       </button>
 
       <Transition>
