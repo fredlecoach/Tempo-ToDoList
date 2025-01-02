@@ -22,14 +22,17 @@
     </form>
   </fieldset>
 
+
+  <hr class="my-5">
+
   <div class="row">
     <!-- Liste des tâches -->
     <ul v-if="taskList.length > 0">
-      <li v-for="(task, index) in taskList" :key="index">
-        <strong class="text-danger">{{ formatDate(task.date) }}</strong> : 
-        <span class="text-success">{{ task.name.toUpperCase() }}</span> 
-        <button @click="removeTask(index)" class="btn btn-sm btn-warning ms-2">
-          Supprimer
+      <li v-for="(task, index) in taskList" :key="index" class="d-flex  mb-1 ">
+        <strong class="text-danger col-6 col-md-2">{{ formatDate(task.date) }} </strong>  
+        <span class="text-success col-4 col-md-4 mx-2">{{ task.name.toUpperCase() }}</span> 
+        <button @click="removeTask(index)" class="btn btn-sm btn-warning ms-2 fw-bold col-md-1" title="supprimer la tâche">
+          X
         </button>
       </li>
     </ul>

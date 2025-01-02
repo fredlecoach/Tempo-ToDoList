@@ -34,7 +34,7 @@
             <RouterLink class="nav-link" to="/planning" active-class="nav-link-active">Mon planning</RouterLink>
           </li>
           <li class="nav-item">
-            <RouterLink class="nav-link" to="/admin" active-class="nav-link-active">Tâches administratives</RouterLink>
+            <RouterLink class="nav-link" to="/admin" active-class="nav-link-active">Tâches à faire</RouterLink>
           </li>
         </ul>
       </nav>
