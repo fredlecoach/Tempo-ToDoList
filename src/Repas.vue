@@ -55,11 +55,11 @@
               <th style="background-color: #e9cbb1">{{ day.label }}</th>
               <td>
                 {{ days[day.midi] }}
-                <button v-if="days[day.midi]" @click="deleteMeal(day.midi)">x</button>
+                <button v-if="days[day.midi]" @click="deleteMeal(day.midi)" class="btn btn-danger fw-bold">x</button>
               </td>
               <td>
                 {{ days[day.soir] }}
-                <button v-if="days[day.soir]" @click="deleteMeal(day.soir)">x</button>
+                <button v-if="days[day.soir]" @click="deleteMeal(day.soir)" class="btn btn-danger fw-bold ">X</button>
               </td>
             </tr>
           </tbody>
@@ -71,7 +71,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 
 // Liste des jours et des champs associés
 const daysList = [
@@ -106,16 +106,26 @@ const days = ref({
 // Nouveau repas
 const newMeal = ref({ name: '', day: '' });
 
+// faire remonter les données enregistrés
+onMounted( ()=>{
+  const storeMeal = localStorage.getItem('repas')
+  if(storeMeal){
+    days.value = JSON.parse(storeMeal)
+  }
+})
+
 // Ajouter un repas
 const addMeal = () => {
   if (!newMeal.value.name.trim() || !newMeal.value.day) return;
   days.value[newMeal.value.day] = newMeal.value.name;
   newMeal.value = { name: '', day: '' };
+  localStorage.setItem('repas', JSON.stringify(days.value))
 };
 
 // Supprimer un repas
 const deleteMeal = (mealKey) => {
   days.value[mealKey] = '';
+  localStorage.setItem('repas', JSON.stringify(days.value))
 };
 
 // Activer/désactiver le bouton
