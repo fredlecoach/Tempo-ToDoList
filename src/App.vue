@@ -2,6 +2,12 @@
   <div class="app-layout">
     <!-- Colonne verte fixe sur la gauche -->
     <div class="sidebar">
+      <!-- footer -->
+     <footer style="margin-bottom: 100px;">
+      <small class="footer">FredRc &copy - Tous droits réservés</small>
+     </footer>
+     <!-- fin footer -->
+      
       <span class="navbar-brand">
         <img src="./styles/images/logoTempo.png" alt="logo tempo" />
       </span>
@@ -47,6 +53,7 @@
       <!-- Le contenu de la route sélectionnée sera affiché ici -->
       <router-view></router-view>
     </div>
+
   </div>
 </template>
 
@@ -148,6 +155,10 @@ const toggleMenu = () => {
 .nav-item {
   margin: 10px 0;
   list-style: none;
+}
+/* footer */
+.footer{
+  color:#e9cbb1;
 }
 
 /* Contenu principal */
