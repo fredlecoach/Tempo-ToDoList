@@ -96,10 +96,14 @@ const newItem = ref('');
 
  // charger la liste de produits enregistrées depuis le localStorage
  onMounted( ()=>{
-      const storeItems = localStorage.getItem('items');
-      if  (storeItems){
-        courses.value = JSON.parse(storeItems)
-      }
+  const storedItems = localStorage.getItem('items');
+try {
+  courses.value = storedItems ? JSON.parse(storedItems) : [];
+} catch (error) {
+  console.error("Erreur lors de la récupération des données du localStorage :", error);
+  courses.value = [];
+}
+
     })
 
 // ajouter un produit
