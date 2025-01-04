@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 style="margin-bottom: 50px;">Planning <i class="bi bi-calendar-date"></i></h1>
+    <h1 style="margin-bottom: 50px;">Planning <i class="bi bi-calendar-date text-warning"></i></h1>
     <legend style="background-color: #e9cbb1;" class="text-center mb-2">Cliquer sur une date pour ajouter un événement</legend>
 
     <!-- FullCalendar -->

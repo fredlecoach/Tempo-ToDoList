@@ -1,5 +1,5 @@
 <template>
-  <h1 style="margin-bottom: 50px;">Tâches administratives <i class="bi bi-card-list"></i></h1>
+  <h1 style="margin-bottom: 50px;">Tâches administratives <i class="bi bi-card-list text-danger"></i></h1>
 
   <fieldset>
     <legend class="text-center py-1" style="background-color: #e9ccb1;">Ajouter une tâche</legend>

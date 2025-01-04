@@ -1,5 +1,5 @@
 <template>
-  <h1>Liste de course <i class="bi bi-cart-fill"></i> </h1>
+  <h1>Liste de course <i class="bi bi-cart-fill" style="color: orangered"></i> </h1>
       <button class="btn btn-secondary mx-1 mb-1" @click="toggleHiddenItems" title="cliquer pour masquer ou afficher les éléments ajoutés">
         {{ hiddenItems ? '🫣 Masquer' : '👁️ Afficher ' }} les produits déjà pris
       </button><br>

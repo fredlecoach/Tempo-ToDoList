@@ -1,9 +1,7 @@
 <template>
   <div>
-    <h1 class="mb-5">
-      Repas de la semaine
-      <img src="./styles/images/nouille.png" alt="repas" width="50px" />
-    </h1>
+    <h1 class="mb-5">Repas de la semaine <i class="bi bi-apple" style="color: #41BE25;"></i></h1>
+
 
     <!-- Formulaire ajout de repas -->
     <fieldset>

@@ -3,7 +3,7 @@
     <!-- Colonne verte fixe sur la gauche -->
     <div class="sidebar">
       <!-- footer -->
-     <footer style="margin-bottom: 100px;">
+     <footer style="margin-bottom: 80px;">
       <small class="footer">FredRc &copy - Tous droits réservés</small>
      </footer>
      <!-- fin footer -->
@@ -42,6 +42,9 @@
           <li class="nav-item">
             <RouterLink class="nav-link" to="/admin" active-class="nav-link-active">Tâches à faire</RouterLink>
           </li>
+          <li class="nav-item">
+            <RouterLink class="nav-link" to="/sante" active-class="nav-link-active">Santé</RouterLink>
+          </li>
         </ul>
       </nav>
     </Transition>
@@ -59,6 +62,7 @@
 
 <script setup>
 import { ref } from 'vue';
+import { RouterLink } from 'vue-router';
 
 // État pour gérer l'affichage de la navigation
 const afficherNav = ref(false);
@@ -95,6 +99,7 @@ const toggleMenu = () => {
   align-items: center; /* Centrer le contenu horizontalement */
   padding: 20px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Optionnel : donne un effet de séparation */
+  overflow-y: auto; /* permet le défilement vertical de la sidebar */
 }
 
 /* liens de navigation */
@@ -156,6 +161,8 @@ const toggleMenu = () => {
   margin: 10px 0;
   list-style: none;
 }
+
+
 /* footer */
 .footer{
   color:#e9cbb1;
