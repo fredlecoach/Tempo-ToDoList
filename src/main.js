@@ -7,6 +7,7 @@ import Repas from './Repas.vue';
 import Planning from './Planning.vue';
 import Admin from './Admin.vue';
 import Sante from './Sante.vue';
+import Menage from './Menage.vue';
 
 // Définir les routes
 const routes = [
@@ -16,6 +17,7 @@ const routes = [
   { path: '/planning', component: Planning },
   { path: '/admin', component: Admin },
   { path: '/sante', component: Sante },
+  { path: '/menage', component: Menage },
 ];
 
 // Créer le routeur

@@ -28,10 +28,10 @@
       <nav v-if="afficherNav" class="navbar">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <RouterLink class="nav-link" to="/" active-class="nav-link-active">Liste de courses</RouterLink>
+            <RouterLink class="nav-link" to="/" active-class="nav-link-active">Mes courses</RouterLink>
           </li>
           <li class="nav-item">
-            <RouterLink class="nav-link" to="/repas" active-class="nav-link-active">Repas de la semaine</RouterLink>
+            <RouterLink class="nav-link" to="/repas" active-class="nav-link-active">Mes repas</RouterLink>
           </li>
           <li class="nav-item">
             <RouterLink class="nav-link" to="/recettes" active-class="nav-link-active">Mes recettes</RouterLink>
@@ -40,11 +40,37 @@
             <RouterLink class="nav-link" to="/planning" active-class="nav-link-active">Mon planning</RouterLink>
           </li>
           <li class="nav-item">
-            <RouterLink class="nav-link" to="/admin" active-class="nav-link-active">Tâches à faire</RouterLink>
+            <RouterLink class="nav-link" to="/admin" active-class="nav-link-active">Mes tâches</RouterLink>
           </li>
-          <li class="nav-item">
-            <RouterLink class="nav-link" to="/sante" active-class="nav-link-active">Santé</RouterLink>
-          </li>
+          <!-- menu déroulant -->
+          <li class="nav-item dropdown">
+              <button
+                class="btn dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Mes astuces
+              </button>
+              <ul class="dropdown-menu">
+                <li>
+                  <RouterLink
+                    class="dropdown-item rounded"
+                    to="/sante"
+                    active-class="nav-link-active"
+                  >Santé</RouterLink>
+                </li>
+                <li>
+                  <RouterLink
+                    class="dropdown-item rounded"
+                    to="/menage"
+                    active-class="nav-link-active"
+                  >Ménage</RouterLink>
+                </li>
+              </ul>
+            </li>
+
+          
         </ul>
       </nav>
     </Transition>
@@ -195,5 +221,30 @@ const toggleMenu = () => {
 
 .v-enter-active, .v-leave-active{
   transition: .7s ;
+}
+
+.dropdown-toggle{
+  position: relative;
+  left: -17px;
+  background-color: transparent;
+  font-weight: bold;
+  color: #e9cbb1;
+  border: none;
+}
+.dropdown-toggle:hover{
+  color: #73d298;
+}
+
+.dropdown-item{
+  font-weight: bold;
+  color: #e9cbb1;
+}
+.dropdown-item:hover{
+  color: #73d298;
+  /* text-align: center; */
+}
+
+.dropdown-menu{
+  background-color: transparent;
 }
 </style>

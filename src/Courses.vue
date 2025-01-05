@@ -1,34 +1,66 @@
 <template>
   <h1>Liste de course <i class="bi bi-cart-fill" style="color: orangered"></i> </h1>
-      <button class="btn btn-secondary mx-1 mb-1" @click="toggleHiddenItems" title="cliquer pour masquer ou afficher les éléments ajoutés">
-        {{ hiddenItems ? '🫣 Masquer' : '👁️ Afficher ' }} les produits déjà pris
-      </button><br>
-      <button class="btn btn-secondary mb-1 mx-1" @click="toggleTri">{{ triCroissant ? '↡ Alphabétique (Z-A)' : '↟ Alphabétique (A-Z)' }}</button>
-      <!-- bouton choix multiples -->
-      <!-- Liste des recettes pour récupérer les ingrédients -->
-      <div class="dropdown mx-1">
-        <a class="btn boutonBis dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Récupérer ingrédients
-        </a>
+  <div class="d-flex flex-wrap align-items-center justify-content-between">
+  <!-- Premier bouton -->
+  <button
+    class="btn btn-dark mx-1 mb-1 flex-grow-1"
+    @click="toggleHiddenItems"
+    title="cliquer pour masquer ou afficher les éléments ajoutés"
+  >
+    {{ hiddenItems ? '🫣 Masquer' : '👁️ Afficher ' }} les produits déjà pris
+  </button>
 
-        <ul class="dropdown-menu">
-          <li v-for="(recipe, id) in recipes" :key="id">
-            <div class="d-flex align-items-center">
-              <span class="dropdown-item">{{ recipe.name.toUpperCase() }}</span>
-              <button class="btn boutonBis btn-sm ms-2" @click="loadCourses(recipe)">Sélectionner</button>
-            </div>
-          </li>
-          <span v-show="!recipes.length" class="text-primary px-2 fw-bold">
-            {{ ingredientsList ? 'Aucun ingrédient ajouté' : 'Aucune recette enregistrée' }}
-          </span>
-        </ul>
+  <!-- Deuxième bouton -->
+  <button
+    class="btn btn-secondary mx-1 mb-1 flex-grow-1"
+    @click="toggleTri"
+  >
+    {{ triCroissant ? '↡ Alphabétique (Z-A)' : '↟ Alphabétique (A-Z)' }}
+  </button>
 
-      </div>
+  <!-- Troisième bouton (dropdown) -->
+  <div class="dropdown mx-1 mb-1 flex-grow-1">
+    <a
+      class="btn boutonBis dropdown-toggle w-100"
+      href="#"
+      role="button"
+      data-bs-toggle="dropdown"
+      aria-expanded="false"
+    >
+      Récupérer ingrédients
+    </a>
 
-      
+    <ul class="dropdown-menu">
+      <li v-for="(recipe, id) in recipes" :key="id">
+        <div class="d-flex align-items-center">
+          <span class="dropdown-item">{{ recipe.name.toUpperCase() }}</span>
+          <button
+            class="btn boutonBis btn-sm ms-2"
+            @click="loadCourses(recipe)"
+          >
+            Sélectionner
+          </button>
+        </div>
+      </li>
+      <span
+        v-show="!recipes.length"
+        class="text-primary px-2 fw-bold"
+      >
+        {{ ingredientsList
+          ? 'Aucun ingrédient ajouté'
+          : 'Aucune recette enregistrée' }}
+      </span>
+    </ul>
+  </div>
+</div>
+
+
+      <hr class="my-3">
 
       <!-- formulaire pour ajouter des produits -->
-      <form @submit.prevent="addItem" class="my-5">
+      <fieldset>
+        <legend class="text-center py-1" style="background-color: #e9ccb1;">Ajouter mes produits</legend>
+        <form @submit.prevent="addItem" class="my-5">
         <div class="form-group">
           <input 
             type="text" 
@@ -39,6 +71,8 @@
           <button class="btn btn-secondary m-1" type="submit" :disabled="newItem.length === 0">Ajouter</button>
         </div>
       </form>
+      </fieldset>
+      
 
       <!-- Liste des courses -->
       <ul class="d-flex flex-column">
@@ -237,7 +271,7 @@ onMounted(() => {
 }
 
 .boutonBis:hover{
-  background-color: #e9cbb1;
+  background-color: #6cc1e2;
   color: #2b4070;
 
 }
