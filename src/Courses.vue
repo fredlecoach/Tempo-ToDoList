@@ -73,6 +73,7 @@
       </form>
       </fieldset>
       
+      <p class="border col px-1" v-if="restCourses > 0"><i>Nombre d'article{{ restCourses > 1 ? 's' : '' }} à prendre :</i> <span class="text-primary fw-bold">{{ restCourses }}</span> </p>
 
       <!-- Liste des courses -->
       <ul class="d-flex flex-column">
@@ -105,7 +106,6 @@
         </span>
       </ul>
 
-      <p class="border col px-1" v-if="restCourses > 0"><i>Nombre d'article{{ restCourses > 1 ? 's' : '' }} à prendre :</i> <span class="text-primary fw-bold">{{ restCourses }}</span> </p>
       <!-- <check name="frédéric" surname="fred" age= 45 /> -->
       <img src="./styles/images/caddie-ecurueil.jpg" alt="caddie de courses" class="w-100 object-fit-cover" />
 </template>
