@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1 style="margin-bottom: 50px;">Mon planning <i class="bi bi-calendar-date text-warning"></i></h1>
+    <small class="fw-bold">Non modifiable sur smartphone</small>
     <legend style="background-color: #e9cbb1;" class="text-center mb-2">Cliquer sur une date pour ajouter un événement</legend>
 
     <!-- FullCalendar -->
