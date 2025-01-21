@@ -247,4 +247,14 @@ const toggleMenu = () => {
 .dropdown-menu{
   background-color: transparent;
 }
+
+@media (max-width: 1000px){
+  .main-content{
+    width: 70%;
+  }
+  .navbar{
+    width: auto;
+  }
+}
+
 </style>
